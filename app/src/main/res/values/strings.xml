@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name" translatable="false">Stock Hawk</string>
+
+    <string name="action_example">Example action</string>
+
+    <string name="action_settings" translatable="true">Settings</string>
+    <string name="action_change_units" translatable="true">Change Units</string>
+    <string name="symbol_search" translatable="true">Symbol Search</string>
+    <string name="content_test" translatable="true">Search for a Stock Symbol</string>
+    <string name="input_hint" translatable="false">FB</string>
+    <string name="input_prefill" />
+    <string name="no_network" translatable="true">Uh-oh! This app requires an internet connection.
+        To ensure data is current and in order to add stocks, you must be connected to the internet.</string>
+
+    <string name="widget_title">StockHawk</string>
+
+    <string name="detail_text">Details</string>
+
+    <string name="list_description" translatable="true">Stock symbol</string>
+    <string name="convert_description" translatable="true">Convert current stock value change between dollars and percent</string>
+    <string name="value_description" translatable="true">Current stock value</string>
+    <string name="change_description" translatable="true">Change in stock value</string>
+    <string name="detail_description" translatable="true">Graph showing value change over a period of time</string>
+    <string name="fab_description" translatable="true">Click here to add a stock</string>
+</resources>
