@@ -12,6 +12,10 @@ import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
 import com.sam_chordas.android.stockhawk.rest.Utils;
 
+//https://zoom.us/s/5467158583
+//For this class I references Sunshine's widget classes and did my best to make it work for
+//my own project
+
 public class StockRemoteViewsService extends android.widget.RemoteViewsService{
     public final String LOG_TAG = StockRemoteViewsService.class.getSimpleName();
     private static final String[] QUOTE_COLUMNS = {
