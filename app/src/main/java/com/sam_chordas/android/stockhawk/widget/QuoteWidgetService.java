@@ -6,6 +6,7 @@ import android.os.Binder;
 import android.util.Log;
 import android.widget.AdapterView;
 import android.widget.RemoteViews;
+import android.widget.RemoteViewsService;
 
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
@@ -16,8 +17,8 @@ import com.sam_chordas.android.stockhawk.rest.Utils;
 //For this class I references Sunshine's widget classes and did my best to make it work for
 //my own project
 
-public class StockRemoteViewsService extends android.widget.RemoteViewsService{
-    public final String LOG_TAG = StockRemoteViewsService.class.getSimpleName();
+public class QuoteWidgetService extends RemoteViewsService {
+    public final String LOG_TAG = QuoteWidgetService.class.getSimpleName();
     private static final String[] QUOTE_COLUMNS = {
             QuoteColumns._ID,
             QuoteColumns.SYMBOL,
@@ -82,34 +83,40 @@ public class StockRemoteViewsService extends android.widget.RemoteViewsService{
                         data == null || !data.moveToPosition(position)) {
                     return null;
                 }
-                RemoteViews views = new RemoteViews(getPackageName(),
-                        R.layout.widget_collect_item);
+                // get the data for this position from the content provider
+                String symbol = "";
+                String bid = "";
+                String change = "";
 
-                views.setTextViewText(R.id.stock_symbol, data.getString(data.getColumnIndex("symbol")));
-                if (data.getInt(data.getColumnIndex(QuoteColumns.ISUP)) == 1) {
-                    views.setInt(R.id.change, "", R.drawable.percent_change_pill_green);
-                } else {
-                    views.setInt(R.id.change, "", R.drawable.percent_change_pill_red);
+                if (data.moveToPosition(position)) {
+                    symbol = data.getString(
+                            data.getColumnIndex(QuoteColumns.SYMBOL));
+                    bid = data.getString(
+                            data.getColumnIndex(QuoteColumns.BIDPRICE));
+                    change = data.getString(
+                            data.getColumnIndex(QuoteColumns.PERCENT_CHANGE));
                 }
 
-                Log.e("RVS", data.getString(data.getColumnIndex("symbol")));
+                RemoteViews views = new RemoteViews(getPackageName(), R.layout.quote_widget_item);
+                views.setInt(R.id.quote_widget, "setBackgroundResource", R.color.graph_background);
+                views.setTextViewText(R.id.widget_stock_symbol, symbol);
+                views.setTextColor(R.id.widget_stock_symbol, getResources().getColor(R.color.white));
+                views.setTextViewText(R.id.widget_bid_price, bid);
 
-                if (Utils.showPercent) {
-                    views.setTextViewText(R.id.change, data.getString(data.getColumnIndex(QuoteColumns.PERCENT_CHANGE)));
+                if (data.getInt(data.getColumnIndex("is_up")) == 1) {
+                    views.setInt(R.id.widget_change, "setBackgroundResource", R.drawable.percent_change_pill_green);
                 } else {
-                    views.setTextViewText(R.id.change, data.getString(data.getColumnIndex(QuoteColumns.CHANGE)));
+                    views.setInt(R.id.widget_change, "setBackgroundResource", R.drawable.percent_change_pill_red);
                 }
 
-                final Intent fillInIntent = new Intent();
-                fillInIntent.putExtra("symbol", data.getString(data.getColumnIndex(QuoteColumns.SYMBOL)));
-                views.setOnClickFillInIntent(R.id.widget_list_item, fillInIntent);
+                views.setTextViewText(R.id.widget_change, change);
 
                 return views;
             }
 
             @Override
             public RemoteViews getLoadingView() {
-                return new RemoteViews(getPackageName(), R.layout.widget_collect_item);
+                return null;
             }
 
             @Override

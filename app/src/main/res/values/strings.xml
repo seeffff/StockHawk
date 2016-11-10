@@ -22,4 +22,6 @@
     <string name="change_description" translatable="true">Change in stock value</string>
     <string name="detail_description" translatable="true">Graph showing value change over a period of time</string>
     <string name="fab_description" translatable="true">Click here to add a stock</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>

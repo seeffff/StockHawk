@@ -20,5 +20,17 @@
     <item name="android:textSize">25sp</item>
     <item name="android:textAllCaps">true</item>
   </style>
+  <style name="WidgetPercentChangeTextStyle">
+    <item name="android:textSize">20sp</item>
+    <item name="android:textColor">#FFF</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+  <style name="WidgetBidPriceTextStyle">
+    <item name="android:textSize">20sp</item>
+  </style>
+  <style name="WidgetStockSymbolTextStyle">
+    <item name="android:textSize">25sp</item>
+    <item name="android:textAllCaps">true</item>
+  </style>
 
 </resources>
